@@ -1,0 +1,234 @@
+/* ============ PRODUCTS PAGE ============ */
+.products-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 16px 20px;
+  background: #f8f9fc;
+  border-radius: 10px;
+  border: 1px solid #e8ecf5;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.products-result-info {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.products-result-info strong {
+  color: #4e97fd;
+  font-weight: 700;
+}
+
+.products-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  min-width: 280px;
+  transition: border-color 0.2s;
+}
+
+.products-search:focus-within {
+  border-color: #4e97fd;
+  box-shadow: 0 0 0 3px rgba(78, 151, 253, 0.1);
+}
+
+.products-search i { color: #718096; font-size: 14px; }
+
+.products-search input {
+  border: none;
+  background: none;
+  flex: 1;
+  font-size: 14px;
+  color: #1a202c;
+  outline: none;
+}
+
+.clear-search {
+  background: none;
+  border: none;
+  color: #718096;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+.clear-search:hover { color: #e4573d; }
+
+/* Layout */
+.products-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* ============ SIDEBAR ============ */
+.products-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 120px;
+}
+
+.sidebar-widget {
+  background: white;
+  border: 1.5px solid #e8ecf5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #1a5db5, #4e97fd);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 8px 0;
+}
+
+.sidebar-list li { }
+
+.sidebar-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 18px;
+  font-size: 13.5px;
+  color: #4a5568;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sidebar-link:hover {
+  background: #f8faff;
+  color: #4e97fd;
+  padding-left: 22px;
+}
+
+.sidebar-link.active {
+  background: rgba(78, 151, 253, 0.08);
+  color: #4e97fd;
+  font-weight: 600;
+  border-right: 3px solid #4e97fd;
+}
+
+.cat-count {
+  background: #f0f4f8;
+  color: #718096;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.sidebar-link.active .cat-count {
+  background: rgba(78, 151, 253, 0.15);
+  color: #4e97fd;
+}
+
+/* Sidebar CTA */
+.sidebar-cta {
+  background: linear-gradient(135deg, #0a2244, #1a5db5);
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+  color: white;
+}
+
+.sidebar-cta i {
+  font-size: 32px;
+  color: #4e97fd;
+  margin-bottom: 14px;
+}
+
+.sidebar-cta h4 {
+  font-size: 15px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.sidebar-cta p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* ============ PRODUCTS MAIN ============ */
+.products-grid-page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* No Results */
+.no-products {
+  text-align: center;
+  padding: 80px 20px;
+  color: #718096;
+}
+
+.no-products i {
+  font-size: 48px;
+  color: #c8d2e0;
+  margin-bottom: 20px;
+}
+
+.no-products h3 {
+  font-size: 20px;
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.no-products p {
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .products-layout {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .products-grid-page {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .products-sidebar {
+    position: static;
+  }
+
+  .products-grid-page {
+    grid-template-columns: 1fr;
+  }
+}

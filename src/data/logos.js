@@ -1,0 +1,41 @@
+
+export const partners = [
+  "/images/logos/logo_1.png",
+  "/images/logos/logo_2.png",
+  "/images/logos/logo_3.png",
+  "/images/logos/logo_4.png",
+  "/images/logos/logo_6.png",
+  "/images/logos/logo_8.png"
+];
+export const clients = [
+  "/images/logos/logo_0.png",
+  "/images/logos/logo_5.png",
+  "/images/logos/logo_7.png",
+  "/images/logos/logo_9.png",
+  "/images/logos/logo_10.png",
+  "/images/logos/logo_11.png",
+  "/images/logos/logo_12.png",
+  "/images/logos/logo_13.png",
+  "/images/logos/logo_14.png",
+  "/images/logos/logo_15.png",
+  "/images/logos/logo_16.png",
+  "/images/logos/logo_17.png",
+  "/images/logos/logo_18.png",
+  "/images/logos/logo_19.png",
+  "/images/logos/logo_20.png",
+  "/images/logos/logo_21.png",
+  "/images/logos/logo_22.png",
+  "/images/logos/logo_23.png",
+  "/images/logos/logo_24.png",
+  "/images/logos/logo_25.png",
+  "/images/logos/logo_26.png",
+  "/images/logos/logo_27.png",
+  "/images/logos/logo_28.png",
+  "/images/logos/logo_29.png",
+  "/images/logos/logo_30.png",
+  "/images/logos/logo_31.png",
+  "/images/logos/logo_32.png",
+  "/images/logos/logo_33.png",
+  "/images/logos/logo_34.png",
+  "/images/logos/logo_35.png"
+];
