@@ -8,19 +8,28 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { username, password } = req.body;
+  try {
+    if (!supabase) {
+      return res.status(500).json({ error: 'Database configuration missing (SUPABASE_URL or SUPABASE_ANON_KEY)' });
+    }
 
-  const { data: user, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('username', username)
-    .eq('password', password)
-    .single();
+    const { username, password } = req.body;
 
-  if (user && !error) {
-    const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '24h' });
-    res.json({ token });
-  } else {
-    res.status(401).json({ error: 'Invalid credentials' });
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('username', username)
+      .eq('password', password)
+      .single();
+
+    if (user && !error) {
+      const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '24h' });
+      res.json({ token });
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: err.message || 'Internal server error' });
   }
 }
