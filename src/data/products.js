@@ -156,42 +156,6 @@ export const products = [
     "video_url": null
   },
   {
-    "id": 7,
-    "slug": "turbiscan-lab",
-    "name": "Turbiscan Lab",
-    "category": "stability",
-    "brand": "Formulaction",
-    "industry": [
-      "Pharmaceuticals & Cosmetics",
-      "Food / Beverages",
-      "Chemicals"
-    ],
-    "image": "/images/6.png",
-    "description": "The Turbiscan Lab is the world reference for stability and shelf-life characterization. It uses Static Multiple Light Scattering (SMLS) technology to detect destabilization mechanisms in concentrated dispersions.",
-    "excerpt": "World reference for stability and shelf-life characterization of concentrated dispersions.",
-    "featured": true,
-    "url": "https://femto-scientific.com/turbiscan-lab/",
-    "specifications": [
-      {
-        "key": "Technology",
-        "value": "Static Multiple Light Scattering (SMLS)"
-      },
-      {
-        "key": "Concentration",
-        "value": "0% to 95% (v/v)"
-      },
-      {
-        "key": "Particle size",
-        "value": "10 nm to 1000 μm"
-      },
-      {
-        "key": "Temperature range",
-        "value": "4°C to 60°C"
-      }
-    ],
-    "video_url": null
-  },
-  {
     "id": 8,
     "slug": "turbiscan-ager",
     "name": "Turbiscan AGS",
@@ -813,6 +777,232 @@ export const products = [
     "url": "",
     "specifications": [],
     "video_url": ""
+  },
+  {
+    "id": 34,
+    "slug": "sync-particle-size-shape-analyzer",
+    "name": "SYNC Particle Size and Shape Analyzer",
+    "category": "Particle Characterization",
+    "brand": "MICROTRAC",
+    "industry": [
+      "Pharmaceutical"
+    ],
+    "image": "/images/products/product_v2_14.png",
+    "description": "MRB integrates its highly accurate patented tri-laser diffraction analyzer technology with its versatile dynamic image analysis capability to provide particle characterization practitioners with a unique measuring experience.",
+    "excerpt": "Pioneer PARTICLE SIZE AND SHAPE ANALYZER",
+    "featured": true,
+    "url": null,
+    "specifications": [
+      "Measuring range: 10 nm - 4 mm",
+      "Measuring principle: Laser Diffraction (ISO 13320) static light scattering",
+      "Measuring time: ~ 10 to 30 seconds"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 35,
+    "slug": "silverson-lab-mixer",
+    "name": "Laboratory Mixers (L5M-A)",
+    "category": "Mixers",
+    "brand": "Silverson",
+    "industry": [
+      "Pharmaceutical",
+      "Food",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_47.png",
+    "description": "The L5M-A Laboratory Mixer is suitable for the widest range of applications – mixing, emulsifying, homogenizing, disintegrating and dissolving.",
+    "excerpt": "High Speed High Shear Mixers for laboratory and small-scale production.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Capacity 1ml up to 12 liters",
+      "Reduces mixing times by up to 90%",
+      "Rapid dissolution of solids"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 36,
+    "slug": "jacomex-puresmart-glovebox",
+    "name": "PURESMART GLOVEBOX",
+    "category": "Isolators",
+    "brand": "Jacomex",
+    "industry": [
+      "Pharmaceutical",
+      "Research"
+    ],
+    "image": "/images/products/product_v2_63.png",
+    "description": "The PURESMART Glove Box is a controlled atmosphere glove box for the products’ protection. It is suitable for academic research, start-ups and industries.",
+    "excerpt": "Glove boxes with stand-alone purification units < 1PPM H2O – O2.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Preparation",
+      "Weighing",
+      "Chemical reactions and syntheses"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 38,
+    "slug": "serstech-arx",
+    "name": "Handheld RAMAN spectrometer Serstech Arx",
+    "category": "Spectrometry",
+    "brand": "Serstech",
+    "industry": [
+      "Pharmaceutical",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_73.png",
+    "description": "Serstech Arx is a revolutionizing instrument, introducing SharpEyeTM – a patented autofocus technology which improves the signal quality dramatically. Identifies unknown substances quickly and precisely.",
+    "excerpt": "Fast, precise, and handheld RAMAN spectrometer.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Laser excitation: wavelength 785nm",
+      "Max spectral range 400 cm-1 to 2 300 cm-1",
+      "Weight 590 g (1.3 lb)",
+      "Battery Rechargeable - more than 12 hours of typical use"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 39,
+    "slug": "t-and-d-tr7-series",
+    "name": "TR7 series Data Loggers",
+    "category": "Data Loggers",
+    "brand": "T&D Data Logging",
+    "industry": [
+      "Pharmaceutical",
+      "Food",
+      "Research"
+    ],
+    "image": "/images/products/product_v2_94.png",
+    "description": "Wireless LAN for auto data upload to cloud. USB PC interface, and Bluetooth® connection to PC or mobile device for setup and download.",
+    "excerpt": "Wireless data loggers with cloud connectivity.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Vaccine Mode settings for VFC compatible models TR71A2/75A2",
+      "Remote access to cloud data via mobile device"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 40,
+    "slug": "pi-oxysense",
+    "name": "Online Dissolved Oxygen Meter OxySense",
+    "category": "Online Sensors",
+    "brand": "PI, Process Instruments",
+    "industry": [
+      "Water Treatment",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_97.png",
+    "description": "The OxySense DO controller range of online Dissolved Oxygen Meters utilises the very latest and best optical sensor available in the world today. It is an optical luminescent device which is extremely resistant to abrasion, extremely stable, and has greatly reduced maintenance.",
+    "excerpt": "Online Dissolved Oxygen Analyser with self-cleaning.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Down to zero maintenance",
+      "No chemicals or moving parts",
+      "Up to 24 months between maintenance",
+      "No initial calibration required"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 41,
+    "slug": "phoenix-benchtop-ph-meter",
+    "name": "Basic Benchtop pH-Meter",
+    "category": "Laboratory Equipment",
+    "brand": "Phoenix Instrument",
+    "industry": [
+      "Research",
+      "Pharmaceutical",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_107.png",
+    "description": "Basic Benchtop pH-Meter with wide backlit LCD display, easy to read icons, timer and continuous function, visual and sound alarm, and program start delay.",
+    "excerpt": "Reliable and easy to use benchtop pH meter.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Wide backlit LCD display",
+      "Timer and continuous function",
+      "Safety temperature for sample protection",
+      "Data logger (automatic or manual) 1000 data records"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 33,
+    "slug": "tensiio-force-tensiometer",
+    "name": "Tensíío Force Tensiometer",
+    "category": "Pharmaceutical Analysis",
+    "brand": "KRÜSS",
+    "industry": [
+      "Pharmaceutical",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_4.png",
+    "description": "KRÜSS Scientific is a leader in surface science, providing precision instruments for measuring surface and interfacial tension, contact angle, and related physical properties.",
+    "excerpt": "Precision wettability analysis with Tensiometers in the Washburn Direct Method.",
+    "featured": true,
+    "url": null,
+    "specifications": [
+      "Contact angle (Washburn): 0 to 90°",
+      "Contact angle (Wilhelmy plate): 0 to 180°",
+      "Interfacial and surface tension Range: 1 to 2000 mN/m",
+      "Temperature control Internal: -15 to 300 °C"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 37,
+    "slug": "steroglass-awlife",
+    "name": "Water activity analyser aWLife",
+    "category": "Food Analysis",
+    "brand": "Steroglass",
+    "industry": [
+      "Food",
+      "Pharmaceutical",
+      "Cosmetic"
+    ],
+    "image": "/images/products/product_v2_68.png",
+    "description": "aWLife Water Activity Meter is an indispensable tool for the quality control of products and ingredients in the food, pharmaceutical and cosmetic fields.",
+    "excerpt": "Compliance with ISO 18787:2017. Measurement times: <5 minutes.",
+    "featured": false,
+    "url": null,
+    "specifications": [
+      "Measurement range: from 0.030 to 1,000 aw",
+      "Accuracy: ± 0.003 aw at + 25 ° C",
+      "Calibration: on 7 points"
+    ],
+    "video_url": null
+  },
+  {
+    "id": 7,
+    "slug": "turbiscan-lab",
+    "name": "TURBISCAN LAB",
+    "category": "Particle Characterization",
+    "brand": "MICROTRAC",
+    "industry": [
+      "Pharmaceutical",
+      "Chemical"
+    ],
+    "image": "/images/products/product_v2_21.png",
+    "description": "TurbiscanLAB enables fast and sensitive identification of destabilization mechanisms such as creaming, sedimentation, flocculation, coalescence.",
+    "excerpt": "Predict long term stability of emulsions with polymers.",
+    "featured": false,
+    "url": "https://femto-scientific.com/turbiscan-lab/",
+    "specifications": [
+      "Technology S-MLS 880 nm",
+      "Sample Cell Volume 4 or 20mL",
+      "Temperature range RT - 60°C"
+    ],
+    "video_url": null
   }
 ];
 export const categories = [
@@ -913,104 +1103,104 @@ export const industries = [
 ];
 export const brands = [
   {
+    "url": "https://www.kruss-scientific.com",
+    "logo": "/images/6.png",
     "name": "Krüss Scientific",
-    "logo": "/images/6.png",
-    "description": "World leader in surface science instruments",
-    "url": "https://www.kruss-scientific.com"
+    "description": "World leader in surface science instruments"
   },
   {
+    "url": "https://www.formulaction.com",
+    "logo": "/images/6.png",
     "name": "Formulaction",
-    "logo": "/images/6.png",
-    "description": "Pioneers in stability & shelf-life analyzers",
-    "url": "https://www.formulaction.com"
+    "description": "Pioneers in stability & shelf-life analyzers"
   },
   {
+    "url": "https://www.microtrac.com",
+    "logo": "/images/6.png",
     "name": "Microtrac MRB",
-    "logo": "/images/6.png",
-    "description": "Particle size & shape analysis experts",
-    "url": "https://www.microtrac.com"
+    "description": "Particle size & shape analysis experts"
   },
   {
+    "url": "https://www.amelco.it",
+    "logo": "/images/6.png",
     "name": "AMEL",
-    "logo": "/images/6.png",
-    "description": "Electrochemical instruments manufacturer",
-    "url": "https://www.amelco.it"
+    "description": "Electrochemical instruments manufacturer"
   },
   {
-    "name": "Mast Group",
+    "url": "https://www.mastgrp.com",
     "logo": "/images/6.png",
-    "description": "In-vitro diagnostic instruments",
-    "url": "https://www.mastgrp.com"
+    "name": "Mast Group",
+    "description": "In-vitro diagnostic instruments"
   }
 ];
 export const stats = [
   {
     "icon": "fa-heart",
-    "value": 2560,
-    "label": "Satisfied Clients"
+    "label": "Satisfied Clients",
+    "value": 2560
   },
   {
     "icon": "fa-check-circle",
-    "value": 9862,
-    "label": "Finished Projects"
+    "label": "Finished Projects",
+    "value": 9862
   },
   {
     "icon": "fa-flask",
-    "value": 150,
-    "label": "Products Available"
+    "label": "Products Available",
+    "value": 150
   },
   {
     "icon": "fa-globe",
-    "value": 15,
-    "label": "Years of Experience"
+    "label": "Years of Experience",
+    "value": 15
   }
 ];
 export const heroSlides = [
   {
     "id": 1,
+    "image": "/images/ext-pipette-testtube.png",
     "title": "Leading Scientific Instruments Supplier",
     "subtitle": "Scientific Excellence",
-    "description": "We are a leading company in Egypt for Supplying, Installing, Training, and after sales support for Scientific and Analytical instruments.",
-    "image": "/images/ext-pipette-testtube.png",
     "primaryBtn": {
-      "text": "Explore Products",
-      "link": "/products"
+      "link": "/products",
+      "text": "Explore Products"
     },
+    "description": "We are a leading company in Egypt for Supplying, Installing, Training, and after sales support for Scientific and Analytical instruments.",
     "secondaryBtn": {
-      "text": "Contact Us",
-      "link": "/contact"
+      "link": "/contact",
+      "text": "Contact Us"
     }
   },
   {
     "id": 2,
+    "image": "/images/6.png",
     "title": "Krüss Scientific Instruments",
     "subtitle": "Surface Science",
-    "description": "Advanced surface science instruments including tensiometers, contact angle systems, and foam analyzers from the world leader Krüss Scientific.",
-    "image": "/images/6.png",
     "primaryBtn": {
-      "text": "View Krüss Products",
-      "link": "/products?brand=kruss"
+      "link": "/products?brand=kruss",
+      "text": "View Krüss Products"
     },
+    "description": "Advanced surface science instruments including tensiometers, contact angle systems, and foam analyzers from the world leader Krüss Scientific.",
     "secondaryBtn": {
-      "text": "Learn More",
-      "link": "/about"
+      "link": "/about",
+      "text": "Learn More"
     }
   },
   {
     "id": 3,
+    "image": "/images/6.png",
     "title": "Formulaction Stability Analyzers",
     "subtitle": "Stability & Shelf-life",
-    "description": "The Turbiscan range by Formulaction – the world reference for stability and shelf-life analysis of concentrated emulsions, suspensions and dispersions.",
-    "image": "/images/6.png",
     "primaryBtn": {
-      "text": "Turbiscan Range",
-      "link": "/products?category=stability"
+      "link": "/products?category=stability",
+      "text": "Turbiscan Range"
     },
+    "description": "The Turbiscan range by Formulaction – the world reference for stability and shelf-life analysis of concentrated emulsions, suspensions and dispersions.",
     "secondaryBtn": {
-      "text": "Request Quote",
-      "link": "/contact"
+      "link": "/contact",
+      "text": "Request Quote"
     }
   }
 ];
-export const featuredProducts = products.filter(p => p.featured);
-export const getProductBySlug = (slug) => products.find(p => p.slug === slug);
+export const featuredProducts = (products || []).filter(p => p.featured);
+export const getProductBySlug = (slug) => (products || []).find(p => p.slug === slug);
