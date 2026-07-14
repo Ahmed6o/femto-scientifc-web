@@ -28,17 +28,23 @@ export default async function handler(req, res) {
 
   if (method === 'PUT') {
     const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
-    const { error } = await supabase.from('products').update({
+    const { data, error } = await supabase.from('products').update({
       slug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url
-    }).eq('id', id);
+    }).eq('id', id).select();
 
     if (error) return res.status(500).json({ error: error.message });
+    if (!data || data.length === 0) {
+      return res.status(404).json({ error: 'Product not found or update blocked by database rules (RLS).' });
+    }
     return res.json({ success: true });
   }
 
   if (method === 'DELETE') {
-    const { error } = await supabase.from('products').delete().eq('id', id);
+    const { data, error } = await supabase.from('products').delete().eq('id', id).select();
     if (error) return res.status(500).json({ error: error.message });
+    if (!data || data.length === 0) {
+      return res.status(404).json({ error: 'Product not found or deletion blocked by database rules (RLS).' });
+    }
     return res.json({ success: true });
   }
 

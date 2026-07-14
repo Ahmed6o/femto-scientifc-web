@@ -207,34 +207,6 @@ export const products = [
     "video_url": null
   },
   {
-    "id": 10,
-    "slug": "sync-particle-analyzer",
-    "name": "SYNC Particle Analyzer",
-    "category": "particle-size",
-    "brand": "Microtrac MRB",
-    "industry": [
-      "Pharmaceuticals & Cosmetics",
-      "Chemicals",
-      "Cement Manufacturing"
-    ],
-    "image": "/images/llproductgroup131singular-llproductname710.webp",
-    "description": "The SYNC particle analyzer combines Laser Diffraction with Dynamic Image Analysis. A unique synchronous measurement technology for complete particle characterization in one run.",
-    "excerpt": "Combines Laser Diffraction with Dynamic Image Analysis for complete particle characterization.",
-    "featured": true,
-    "url": "https://femto-scientific.com/sync/",
-    "specifications": [
-      {
-        "key": "Size range",
-        "value": "0.01 μm to 3500 μm"
-      },
-      {
-        "key": "Technology",
-        "value": "Laser Diffraction + DIA"
-      }
-    ],
-    "video_url": null
-  },
-  {
     "id": 11,
     "slug": "camsizer-3d",
     "name": "CAMSIZER 3D",
@@ -403,25 +375,6 @@ export const products = [
         "value": "0.00001"
       }
     ],
-    "video_url": null
-  },
-  {
-    "id": 17,
-    "slug": "puresmart-glove-box",
-    "name": "PURESMART Glove Box",
-    "category": "glove-box",
-    "brand": "Jacomex",
-    "industry": [
-      "Pharmaceuticals & Cosmetics",
-      "Research / Education",
-      "Chemicals"
-    ],
-    "image": "/images/boite-a-gants-puresmart-1.png",
-    "description": "PURESMART Glove Box – Standard Range. Controlled atmosphere glove box with stand-alone purification units. Suitable for academic research, start-ups and industries.",
-    "excerpt": "Standard range controlled atmosphere glove box with stand-alone purification units.",
-    "featured": false,
-    "url": "https://femto-scientific.com/puresmart-glove-box-standard-range/",
-    "specifications": [],
     "video_url": null
   },
   {

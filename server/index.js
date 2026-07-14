@@ -96,8 +96,11 @@ app.put('/api/products/:id', auth, async (req, res) => {
 
 app.delete('/api/products/:id', auth, async (req, res) => {
   try {
-    const { error } = await supabase.from('products').delete().eq('id', req.params.id);
+    const { data, error } = await supabase.from('products').delete().eq('id', req.params.id).select();
     if (error) throw error;
+    if (!data || data.length === 0) {
+      return res.status(404).json({ error: 'Product not found or deletion blocked by database rules (RLS).' });
+    }
     await syncToStaticFiles();
     res.json({ success: true });
   } catch (err) {

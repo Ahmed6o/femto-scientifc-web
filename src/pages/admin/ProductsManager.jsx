@@ -9,7 +9,7 @@ export default function ProductsManager() {
   });
 
   const loadProducts = () => {
-    fetch(`${BASE_URL}/api/products`)
+    fetch(`${BASE_URL}/api/products`, { cache: 'no-store' })
       .then(res => res.json())
       .then(setProducts)
       .catch(console.error);
@@ -26,11 +26,20 @@ export default function ProductsManager() {
 
   const handleDelete = async (id) => {
     if (!confirm('Are you sure?')) return;
-    await fetch(`${BASE_URL}/api/products/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
-    });
-    loadProducts();
+    try {
+      const res = await fetch(`${BASE_URL}/api/products/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert('Failed to delete product: ' + (errorData.error || res.statusText));
+        return;
+      }
+      loadProducts();
+    } catch (e) {
+      alert('Error connecting to the server: ' + e.message);
+    }
   };
 
   const handleFileUpload = async (e, field) => {
@@ -60,18 +69,28 @@ export default function ProductsManager() {
     const url = editing ? `${BASE_URL}/api/products/${editing}` : `${BASE_URL}/api/products`;
     const method = editing ? 'PUT' : 'POST';
     
-    await fetch(url, {
-      method,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
-      },
-      body: JSON.stringify(formData)
-    });
-    
-    setEditing(null);
-    setFormData({ slug: '', name: '', category: '', brand: '', image: '', video_url: '', description: '', excerpt: '', featured: false, url: '' });
-    loadProducts();
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(`Failed to save product: ${errorData.error || res.statusText}`);
+        return;
+      }
+      
+      setEditing(null);
+      setFormData({ slug: '', name: '', category: '', brand: '', image: '', video_url: '', description: '', excerpt: '', featured: false, url: '' });
+      loadProducts();
+    } catch (err) {
+      alert('Error connecting to the server: ' + err.message);
+    }
   };
 
   return (
