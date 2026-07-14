@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import BASE_URL from '../../config';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ products: 0, categories: 0, brands: 0 });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch(`${BASE_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         const categories = new Set(data.map(d => d.category)).size;
