@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import { products, categories } from '../data/products';
+import { categories } from '../data/products';
+import BASE_URL from '../config';
 import './Products.css';
 
 export default function Products() {
@@ -9,7 +10,24 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [search, setSearch] = useState('');
   const [activeBrand, setActiveBrand] = useState('all');
-  const [displayedProducts, setDisplayedProducts] = useState(products);
+  const [allProducts, setAllProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products from API
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/products`)
+      .then(res => res.json())
+      .then(data => {
+        setAllProducts(data);
+        setDisplayedProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
   // Sync URL params
   useEffect(() => {
@@ -22,7 +40,7 @@ export default function Products() {
   }, [searchParams]);
 
   useEffect(() => {
-    let filtered = products;
+    let filtered = allProducts;
     if (activeCategory !== 'all') {
       filtered = filtered.filter(p => p.category === activeCategory);
     }
@@ -33,14 +51,14 @@ export default function Products() {
       const q = search.toLowerCase();
       filtered = filtered.filter(p =>
         p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q)
+        (p.description && p.description.toLowerCase().includes(q)) ||
+        (p.brand && p.brand.toLowerCase().includes(q))
       );
     }
     setDisplayedProducts(filtered);
-  }, [activeCategory, search, activeBrand]);
+  }, [activeCategory, search, activeBrand, allProducts]);
 
-  const allBrands = ['all', ...new Set(products.map(p => p.brand))];
+  const allBrands = ['all', ...new Set(allProducts.map(p => p.brand).filter(Boolean))];
 
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId);
@@ -114,7 +132,7 @@ export default function Products() {
                       >
                         <span>{cat.name}</span>
                         <span className="cat-count">
-                          {cat.id === 'all' ? products.length : products.filter(p => p.category === cat.id).length}
+                          {cat.id === 'all' ? allProducts.length : allProducts.filter(p => p.category === cat.id).length}
                         </span>
                       </button>
                     </li>
@@ -150,7 +168,12 @@ export default function Products() {
 
             {/* Products Grid */}
             <div className="products-main">
-              {displayedProducts.length > 0 ? (
+              {loading ? (
+                <div style={{ textAlign: 'center', padding: '40px' }}>
+                  <i className="fas fa-spinner fa-spin fa-2x" style={{ color: 'var(--primary-color)' }}></i>
+                  <p style={{ marginTop: '10px' }}>Loading products...</p>
+                </div>
+              ) : displayedProducts.length > 0 ? (
                 <div className="products-grid-page">
                   {displayedProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />

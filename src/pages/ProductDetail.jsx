@@ -1,11 +1,42 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getProductBySlug, products } from '../data/products';
 import ProductCard from '../components/ProductCard';
+import BASE_URL from '../config';
 import './ProductDetail.css';
 
 export default function ProductDetail() {
   const { slug } = useParams();
-  const product = getProductBySlug(slug);
+  const [product, setProduct] = useState(null);
+  const [related, setRelated] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/products`)
+      .then(res => res.json())
+      .then(data => {
+        const found = data.find(p => p.slug === slug);
+        setProduct(found);
+        if (found) {
+          setRelated(data.filter(p => p.category === found.category && p.id !== found.id).slice(0, 3));
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <main>
+        <div style={{ textAlign: 'center', padding: '100px 20px' }}>
+          <i className="fas fa-spinner fa-spin fa-3x" style={{ color: 'var(--primary-color)' }}></i>
+          <p style={{ marginTop: '20px', fontSize: '18px' }}>Loading product details...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!product) {
     return (
@@ -19,8 +50,6 @@ export default function ProductDetail() {
       </main>
     );
   }
-
-  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
 
   return (
     <main>
@@ -90,14 +119,16 @@ export default function ProductDetail() {
               )}
 
               {/* Industries */}
-              <div className="product-detail-industries">
-                <h4><i className="fas fa-industry" /> Applications:</h4>
-                <div className="detail-industry-tags">
-                  {product.industry.map((ind) => (
-                    <span key={ind} className="detail-industry-tag">{ind}</span>
-                  ))}
+              {product.industry && product.industry.length > 0 && (
+                <div className="product-detail-industries">
+                  <h4><i className="fas fa-industry" /> Applications:</h4>
+                  <div className="detail-industry-tags">
+                    {product.industry.map((ind) => (
+                      <span key={ind} className="detail-industry-tag">{ind}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Actions */}
               <div className="product-detail-actions">

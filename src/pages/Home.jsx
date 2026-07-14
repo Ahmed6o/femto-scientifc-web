@@ -7,9 +7,10 @@ import 'swiper/css/pagination';
 
 import HeroSlider from '../components/HeroSlider';
 import ProductCard from '../components/ProductCard';
-import { featuredProducts, stats, categories } from '../data/products';
+import { stats, categories } from '../data/products';
 import { partners, clients } from '../data/logos';
 import { pageHome } from '../data/pages';
+import BASE_URL from '../config';
 import './Home.css';
 
 // Animated counter hook
@@ -65,6 +66,26 @@ const sectors = [
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/products`)
+      .then(res => res.json())
+      .then(data => {
+        setAllProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  const displayedProducts = allProducts
+    .filter(p => p.featured)
+    .filter(p => activeCategory === 'all' || p.category === activeCategory)
+    .slice(0, 6);
 
   return (
     <main>
@@ -116,9 +137,18 @@ export default function Home() {
 
           {/* Products Grid */}
           <div className="products-grid">
-            {featuredProducts.slice(0, 6).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '40px', gridColumn: '1 / -1' }}>
+                <i className="fas fa-spinner fa-spin fa-2x" style={{ color: 'var(--primary-color)' }}></i>
+                <p style={{ marginTop: '10px' }}>Loading products...</p>
+              </div>
+            ) : displayedProducts.length > 0 ? (
+              displayedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            ) : (
+              <p style={{ textAlign: 'center', gridColumn: '1 / -1', padding: '40px' }}>No featured products found.</p>
+            )}
           </div>
 
           <div className="text-center mt-40">
