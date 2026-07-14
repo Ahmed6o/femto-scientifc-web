@@ -32,8 +32,15 @@ export default function ProductsManager() {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
       });
       if (!res.ok) {
-        const errorData = await res.json();
-        alert('Failed to delete product: ' + (errorData.error || res.statusText));
+        let errorMsg = res.statusText;
+        try {
+          const text = await res.text();
+          if (text) {
+            const parsed = JSON.parse(text);
+            if (parsed.error) errorMsg = parsed.error;
+          }
+        } catch (e) {}
+        alert('Failed to delete product: ' + errorMsg);
         return;
       }
       loadProducts();
@@ -80,8 +87,15 @@ export default function ProductsManager() {
       });
       
       if (!res.ok) {
-        const errorData = await res.json();
-        alert(`Failed to save product: ${errorData.error || res.statusText}`);
+        let errorMsg = res.statusText;
+        try {
+          const text = await res.text();
+          if (text) {
+            const parsed = JSON.parse(text);
+            if (parsed.error) errorMsg = parsed.error;
+          }
+        } catch (e) {}
+        alert(`Failed to save product: ${errorMsg}`);
         return;
       }
       
