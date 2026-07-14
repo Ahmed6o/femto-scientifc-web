@@ -32,12 +32,16 @@ export default function ProductsManager() {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
       });
       if (!res.ok) {
-        let errorMsg = res.statusText;
+        let errorMsg = `HTTP ${res.status} ${res.statusText}`.trim();
         try {
           const text = await res.text();
           if (text) {
-            const parsed = JSON.parse(text);
-            if (parsed.error) errorMsg = parsed.error;
+            try {
+              const parsed = JSON.parse(text);
+              if (parsed.error) errorMsg = parsed.error;
+            } catch (e) {
+              errorMsg += ` - ${text.substring(0, 100)}`;
+            }
           }
         } catch (e) {}
         alert('Failed to delete product: ' + errorMsg);
@@ -87,12 +91,16 @@ export default function ProductsManager() {
       });
       
       if (!res.ok) {
-        let errorMsg = res.statusText;
+        let errorMsg = `HTTP ${res.status} ${res.statusText}`.trim();
         try {
           const text = await res.text();
           if (text) {
-            const parsed = JSON.parse(text);
-            if (parsed.error) errorMsg = parsed.error;
+            try {
+              const parsed = JSON.parse(text);
+              if (parsed.error) errorMsg = parsed.error;
+            } catch (e) {
+              errorMsg += ` - ${text.substring(0, 100)}`;
+            }
           }
         } catch (e) {}
         alert(`Failed to save product: ${errorMsg}`);
