@@ -5,11 +5,12 @@ const SECRET = process.env.JWT_SECRET || 'femto-admin-secret-key-123';
 
 function verifyAuth(req) {
   const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return null;
+  if (!token) throw new Error('No token provided');
+  if (token === 'null') throw new Error('Token is null string');
   try {
     return jwt.verify(token, SECRET);
-  } catch {
-    return null;
+  } catch (err) {
+    throw new Error('JWT Verification failed: ' + err.message);
   }
 }
 
@@ -24,8 +25,12 @@ export default async function handler(req, res) {
       return res.json(p);
     }
 
-    const user = verifyAuth(req);
-    if (!user) return res.status(401).json({ error: 'Unauthorized' });
+    let user;
+    try {
+      user = verifyAuth(req);
+    } catch (authErr) {
+      return res.status(401).json({ error: 'Unauthorized: ' + authErr.message });
+    }
 
     if (method === 'PUT') {
       const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
