@@ -84,7 +84,7 @@
 
 /* Logo */
 .navbar-logo img {
-  height: 55px;
+  height: 80px;
   width: auto;
   transition: opacity 0.2s;
 }
@@ -417,7 +417,7 @@
 }
 
 @media (max-width: 768px) {
-  .navbar-logo img { height: 44px; }
+  .navbar-logo img { height: 60px; }
   .topbar { display: none; }
   .navbar { top: 0; }
 }
