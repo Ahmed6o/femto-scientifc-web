@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     ]).select().single();
 
     if (error) return res.status(500).json({ error: error.message });
-    return res.json({ id: data.id });
+    return res.json({ id: data?.id });
   }
 
   res.status(405).json({ error: 'Method not allowed' });

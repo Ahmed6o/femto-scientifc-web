@@ -264,9 +264,18 @@ export default function ProductsManager() {
                 onClick={() => handleEdit(p)}
               >
                 <div className="pm-product-thumb">
-                  {p.image
-                    ? <img src={typeof p.image === 'string' && p.image.startsWith('[') ? JSON.parse(p.image)[0] : p.image} alt={p.name} />
-                    : <i className="fas fa-cube" />}
+                  {(() => {
+                    if (!p.image) return <i className="fas fa-cube" />;
+                    if (typeof p.image === 'string' && p.image.startsWith('[')) {
+                      try {
+                        const arr = JSON.parse(p.image);
+                        return <img src={arr[0]} alt={p.name} />;
+                      } catch(e) {
+                        return <img src={p.image} alt={p.name} />;
+                      }
+                    }
+                    return <img src={p.image} alt={p.name} />;
+                  })()}
                 </div>
                 <div className="pm-product-meta">
                   <span className="pm-product-name">{p.name}</span>
