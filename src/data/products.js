@@ -717,21 +717,6 @@ export const products = [
     "video_url": null
   },
   {
-    "id": 32,
-    "slug": "aaa",
-    "name": "aaa",
-    "category": "Pharmaceuticals & Cosmetics",
-    "brand": "Krüss Scientific",
-    "industry": [],
-    "image": "/images/uploads/image-1783507606386-477288975.png",
-    "description": "",
-    "excerpt": "ahahahaahahahahahahahahah",
-    "featured": false,
-    "url": "",
-    "specifications": [],
-    "video_url": ""
-  },
-  {
     "id": 34,
     "slug": "sync-particle-size-shape-analyzer",
     "name": "SYNC Particle Size and Shape Analyzer",
@@ -956,6 +941,572 @@ export const products = [
       "Temperature range RT - 60°C"
     ],
     "video_url": null
+  },
+  {
+    "id": 43,
+    "slug": "force-tensiometer-tensiio",
+    "name": "Force Tensiometer Tensíío",
+    "category": "Tensiometer",
+    "brand": "KRÜSS",
+    "industry": [
+      "Pharmaceuticals & Galenics",
+      "Cosmetics & Personal Care",
+      "Surfactants & Detergents",
+      "Coatings & Paints",
+      "Textiles & Fibers",
+      "Agrochemicals & Pesticides",
+      "Wastewater Treatment",
+      "Battery Technology",
+      "Ceramics & Materials Science",
+      "Metallurgy",
+      "Enhanced Oil Recovery (EOR)",
+      "Ink Manufacturing",
+      "Dispersions & Colloids"
+    ],
+    "image": "/images/uploads/image-1785070283117-554686878.webp",
+    "description": "Developing the best-in-class tensiometer requires more than just an utterly precise force sensor and sample positioning with the widest dynamic range; it demands a focus on user convenience, flexibility, and time-saving lab work. The Tensíío is designed as a universal tensiometer with many individual equipment options, offering a sample stage that moves exceptionally fast for efficiency or extremely slow for high-viscosity liquids with minimal vibration. Its spacious, easily accessible sample chamber, built-in stirrer, and temperature control simplify measurement preparation, complemented by a large, integrated touch display that eliminates the need for an external control pad. For precise temperature control, an optional software-controlled jacket allows measurements from -15 to 140 °C, automatically regulated by ADVANCE software, even for temperature ramps. Tensíío supports 15 (and growing) different methods for analyzing surface and interfacial tension, wettability, and other properties of liquid samples, solids, powders, or fibers, all automated via ADVANCE. An optional high-resolution camera can record events at the contact area, enabling adhesion measurements and custom method creation. The instrument features tri-color illumination to signal result validation, and is highly customizable and upgradeable to meet evolving tasks and budgets. Designed for users, it includes thoughtful details like an easily removable sample chamber bottom, an electronic leveling assistant, removable side doors, and an optional ionizer to manage static charges, ensuring a highly positive user experience. Integrated Micro Dispensers enable fully automated and precise Critical Micelle Concentration (CMC) measurements. The intuitive ADVANCE software provides a workflow-oriented user interface, measurement templates, powerful automation, easy result management, and a wide range of evaluation methods.",
+    "excerpt": "The new generation tensiometer for liquid and solid surfaces.",
+    "featured": false,
+    "url": "",
+    "specifications": [
+      {
+        "key": "Surface Tension (Ring)",
+        "group": "Measuring Methods",
+        "value": "Using the tensile force of a lamella underneath a ring"
+      },
+      {
+        "key": "Interfacial Tension (Ring)",
+        "group": "Measuring Methods",
+        "value": "Using the tensile force of a lamella underneath a ring"
+      },
+      {
+        "key": "Surface Tension (Stretched Lamella)",
+        "group": "Measuring Methods",
+        "value": "Using the tensile force of a lamella which is stretched until it disrupts"
+      },
+      {
+        "key": "Interfacial Tension (Stretched Lamella)",
+        "group": "Measuring Methods",
+        "value": "Using the tensile force of a lamella which is stretched until it disrupts"
+      },
+      {
+        "key": "Automated CMC Determination",
+        "group": "Measuring Methods",
+        "value": "Measuring SFT at different concentrations"
+      },
+      {
+        "key": "Surface Tension (Wilhelmy Plate/Rod)",
+        "group": "Measuring Methods",
+        "value": "Using the wetting force of a liquid at a platinum plate or rod"
+      },
+      {
+        "key": "Interfacial Tension (Wilhelmy Plate/Rod)",
+        "group": "Measuring Methods",
+        "value": "Using the wetting force of a liquid at a platinum plate or rod"
+      },
+      {
+        "key": "Contact Angle (Solid Sample)",
+        "group": "Measuring Methods",
+        "value": "Using the wetting force of a liquid at a solid sample"
+      },
+      {
+        "key": "Contact Angle (Porous Material)",
+        "group": "Measuring Methods",
+        "value": "Using the capillary force between a liquid and porous material"
+      },
+      {
+        "key": "Surface Free Energy (Solid)",
+        "group": "Measuring Methods",
+        "value": "Using contact angle data"
+      },
+      {
+        "key": "Adhesion Parameters",
+        "group": "Measuring Methods",
+        "value": "Calculating adhesion-related scientific parameters for the interfacial contact"
+      },
+      {
+        "key": "Liquid Density",
+        "group": "Measuring Methods",
+        "value": "Using the buoyancy of a probe immersed in the sample"
+      },
+      {
+        "key": "Solid Density",
+        "group": "Measuring Methods",
+        "value": "Using the buoyancy of the sample immersed in a liquid"
+      },
+      {
+        "key": "Dispersion Sedimentation Speed",
+        "group": "Measuring Methods",
+        "value": "Measurement of sedimentation speed of a dispersion"
+      },
+      {
+        "key": "Sediment Penetration Resistance",
+        "group": "Measuring Methods",
+        "value": "Measurement of penetration resistance of a sediment against a probe"
+      },
+      {
+        "key": "Freely Defined Procedures",
+        "group": "Measuring Methods",
+        "value": "Using a force sensor, software-controlled sample stage, and camera (if available)"
+      },
+      {
+        "key": "Consecutive Measurements",
+        "group": "Measuring Methods",
+        "value": "Up to 20 consecutive times and displaying the results together"
+      },
+      {
+        "key": "Surface Tension Component Calculation",
+        "group": "Measuring Methods",
+        "value": "Calculating the polar and disperse part of the surface tension from contact angle and surface tension data"
+      },
+      {
+        "key": "Adhesion Measurement (Drop)",
+        "group": "Measuring Methods",
+        "value": "Force and image evaluation for measuring adhesion of a drop"
+      },
+      {
+        "key": "Liquid Surface Tension",
+        "group": "Measuring Results",
+        "value": "Surface tension of a liquid"
+      },
+      {
+        "key": "Interfacial Tension (Two Liquids)",
+        "group": "Measuring Results",
+        "value": "Interfacial tension between two liquids"
+      },
+      {
+        "key": "Critical Micelle Concentration (CMC)",
+        "group": "Measuring Results",
+        "value": "Of a surfactant and calculation of excess concentration and surface area per molecule"
+      },
+      {
+        "key": "Advancing/Receding Contact Angle",
+        "group": "Measuring Results",
+        "value": "Of a solid body"
+      },
+      {
+        "key": "Solid Surface Free Energy",
+        "group": "Measuring Results",
+        "value": "Surface free energy of a solid"
+      },
+      {
+        "key": "Adhesion Work, Interfacial Tension, Spreading Coefficient",
+        "group": "Measuring Results",
+        "value": "Between a solid and a liquid"
+      },
+      {
+        "key": "Powder Contact Angle",
+        "group": "Measuring Results",
+        "value": "Contact angle of a powder"
+      },
+      {
+        "key": "Liquid Density Result",
+        "group": "Measuring Results",
+        "value": "Density of a liquid"
+      },
+      {
+        "key": "Solid Density Result",
+        "group": "Measuring Results",
+        "value": "Density of a solid"
+      },
+      {
+        "key": "Dispersion Sedimentation Speed Result",
+        "group": "Measuring Results",
+        "value": "Sedimentation speed of a dispersion"
+      },
+      {
+        "key": "Sediment Penetration Resistance Result",
+        "group": "Measuring Results",
+        "value": "Penetration resistance of a sediment"
+      },
+      {
+        "key": "Sample Temperature Result",
+        "group": "Measuring Results",
+        "value": "Sample temperature"
+      },
+      {
+        "key": "Temperature Control Range",
+        "group": "General",
+        "value": "-15 to 140 °C (software-controlled, optional jacket)"
+      },
+      {
+        "key": "Number of Methods",
+        "group": "General",
+        "value": "15 (and growing)"
+      },
+      {
+        "key": "Force Sensor",
+        "group": "General",
+        "value": "Utterly precise, top-class, high-resolution with auto-lock mechanism"
+      },
+      {
+        "key": "Sample Stage",
+        "group": "General",
+        "value": "Widest dynamic range, accurate height detection, fast/slow movement"
+      },
+      {
+        "key": "Sample Chamber",
+        "group": "General",
+        "value": "Spacious, accessible, built-in stirrer, removable bottom plate and side doors"
+      },
+      {
+        "key": "Display",
+        "group": "General",
+        "value": "Large, integrated touch display"
+      },
+      {
+        "key": "Camera",
+        "group": "General",
+        "value": "Optional high-resolution camera"
+      },
+      {
+        "key": "Illumination",
+        "group": "General",
+        "value": "Tri-color illumination (e.g., green/red for result limits)"
+      },
+      {
+        "key": "Leveling Assistant",
+        "group": "General",
+        "value": "Electronic levelling assistant"
+      },
+      {
+        "key": "Charge Disposal",
+        "group": "General",
+        "value": "Optional ionizer"
+      },
+      {
+        "key": "Software",
+        "group": "General",
+        "value": "ADVANCE software (intuitive, workflow-oriented, automation, evaluation)"
+      },
+      {
+        "key": "Upgradeability",
+        "group": "General",
+        "value": "Always possible to upgrade components"
+      },
+      {
+        "key": "CMC Measurement Feature",
+        "group": "General",
+        "value": "Fully automated with Micro Dispensers"
+      }
+    ],
+    "video_url": ""
+  },
+  {
+    "id": 44,
+    "slug": "sync-particle-size-and-shape-analyzer",
+    "name": "SYNC Particle Size and Shape Analyzer",
+    "category": "Particle Size and Shape Analyzer",
+    "brand": "Microtrac",
+    "industry": [
+      "pigments",
+      "paints",
+      "ceramics",
+      "chemicals",
+      "industrial minerals",
+      "metal powders",
+      "construction materials",
+      "cosmetics",
+      "capsules",
+      "pharmaceuticals",
+      "glass",
+      "glass beads",
+      "coatings",
+      "food",
+      "3D printing",
+      "foodstuffs",
+      "emulsions",
+      "polymers",
+      "battery materials"
+    ],
+    "image": "[\"/images/uploads/image-1785070985575-695573677.webp\",\"/images/uploads/image-1785071351554-229882481.jpg\",\"/images/uploads/image-1785071354440-997406538.jpg\",\"/images/uploads/image-1785071356677-552896414.jpg\",\"/images/uploads/image-1785071360102-666116100.jpg\",\"/images/uploads/image-1785071362355-748149108.jpg\",\"/images/uploads/image-1785071365508-391374641.jpg\",\"/images/uploads/image-1785071369088-333182878.jpg\",\"/images/uploads/image-1785071371411-87309856.jpg\"]",
+    "description": "The Microtrac SYNC particle analyzer integrates its highly accurate tri-laser diffraction analyzer technology with its versatile dynamic image analysis capability to provide particle characterization practitioners with a unique measuring experience. The patented synchronous measurement technology allows users to make both a laser diffraction measurement and an image analysis measurement on a single sample, in the same sample cell at the same time: One sample, One optical bench, One flow path, One sample cell, One analysis. The SYNC is ideally suited for routine QC applications and provides valuable information to researchers developing new materials and processes. Its powerful analyzer software offers particle size distribution information and over 30 morphological particle parameters. The patented BLEND routine allows users to examine materials over a wide range of sizes from 0.01 microns to 4000 microns.\n\nDynamic Image Analysis (DIA) provides detailed information regarding the physical properties of materials and particle morphology, which can identify problems and significantly reduce troubleshooting time. Particles in a flowing stream, backlit by a high-speed strobe light, are photographed by a high-resolution digital camera, acquiring more than 30 size and shape parameters for every particle. Microtrac's SYNC provides traditional users of laser diffraction analyzers with exciting new capabilities by combining proven Tri-Laser technology with state-of-the-art camera technology capturing images of the particle stream simultaneously. This offers not only size data but also significantly more information about the shape of materials and the quality of dispersion. Material can be dispersed in a carrier fluid for wet measurements (FLOWSYNC) or in air for dry powder measurements (TURBOSYNC), passing through a single measurement cell. Users can look individually at a laser diffraction or an image analysis, or at a combination of both using the patented BLEND feature, providing a powerful tool for QC and R&D users.",
+    "excerpt": "Combining Laser Diffraction with Dynamic Image Analysis",
+    "featured": false,
+    "url": "",
+    "specifications": [
+      {
+        "key": "Measuring range",
+        "group": "Technical Data",
+        "value": "0.01 - 4000 µm"
+      },
+      {
+        "key": "Measuring principle",
+        "group": "Technical Data",
+        "value": "Laser Diffraction (ISO 13320), Dynamic Image Analysis (ISO 13322-2)"
+      },
+      {
+        "key": "Precision* (Spherical glass beads D50 = 642 microns)",
+        "group": "Technical Data",
+        "value": "CV = 0.7%"
+      },
+      {
+        "key": "Precision* (Spherical glass beads D50 = 57 microns)",
+        "group": "Technical Data",
+        "value": "CV = 1.0%"
+      },
+      {
+        "key": "Precision* (Spherical latex beads D50 = 0.4 microns)",
+        "group": "Technical Data",
+        "value": "CV = 0.6%"
+      },
+      {
+        "key": "Laser class",
+        "group": "Technical Data",
+        "value": "Red 780 nm, blue 405 nm Class 1 laser product per CFR 1040.10 & IEC60825-1"
+      },
+      {
+        "key": "Laser power (Red laser)",
+        "group": "Technical Data",
+        "value": "0.35 to 2 mW nominal"
+      },
+      {
+        "key": "Laser power (Blue laser)",
+        "group": "Technical Data",
+        "value": "4-8 mW nominal"
+      },
+      {
+        "key": "Detection system",
+        "group": "Technical Data",
+        "value": "Two fixed photo-electric detectors with logarithmically spaced segments are placed at correct angles for optimal scattered light detection from 0 to 165 degrees using 151 detector segments."
+      },
+      {
+        "key": "Data",
+        "group": "Technical Data",
+        "value": "Volume, number and area distributions as well as percentile and other summary data"
+      },
+      {
+        "key": "Data format",
+        "group": "Technical Data",
+        "value": "Stored in ODBC format in encrypted Microsoft Access Databases to ensure compatibility with external statistical software applications."
+      },
+      {
+        "key": "Data integrity",
+        "group": "Technical Data",
+        "value": "May be ensured using FDA 21 CFR Part 11 compliant security features including password protection, electronic signatures and assignable permissions"
+      },
+      {
+        "key": "Type of analysis",
+        "group": "Technical Data",
+        "value": "dry and wet analysis"
+      },
+      {
+        "key": "Measuring time",
+        "group": "Technical Data",
+        "value": "~ 10 to 30 seconds"
+      },
+      {
+        "key": "Power requirements (AC input)",
+        "group": "Technical Data",
+        "value": "90 - 264 VAC, 47 - 63 Hz, single phase"
+      },
+      {
+        "key": "Power consumption",
+        "group": "Technical Data",
+        "value": "25 W nominal, 50 W max., depending on options installed"
+      },
+      {
+        "key": "Environmental conditions (Temperature)",
+        "group": "Technical Data",
+        "value": "5° to 40° Celsius (50° to 95° Fahrenheit)"
+      },
+      {
+        "key": "Environmental conditions (Humidity)",
+        "group": "Technical Data",
+        "value": "90% RH, non-condensing maximum"
+      },
+      {
+        "key": "Environmental conditions (Storage Temperature)",
+        "group": "Technical Data",
+        "value": "-10° to 50° Celsius (14° to 122° Fahrenheit) (dry only)"
+      },
+      {
+        "key": "Environmental conditions (Pollution)",
+        "group": "Technical Data",
+        "value": "Degree 2"
+      },
+      {
+        "key": "Standards",
+        "group": "Technical Data",
+        "value": "Laser Diffraction (ISO 13320), Dynamic Image Analysis (ISO 13322-2), Representation of results of particle size analysis (ISO 9276-6)"
+      },
+      {
+        "key": "Image analysis",
+        "group": "Technical Data",
+        "value": "5.2 megapixel (2560 x 2048), 60 fps at max resolution"
+      },
+      {
+        "key": "Wet operation (Volume)",
+        "group": "Technical Data",
+        "value": "200 ml nominal"
+      },
+      {
+        "key": "Wet operation (Flow rate)",
+        "group": "Technical Data",
+        "value": "0 to 65 ml/sec with water"
+      },
+      {
+        "key": "Wet operation (Inlet pressure)",
+        "group": "Technical Data",
+        "value": "50 psig (345 kPa) maximum"
+      },
+      {
+        "key": "Dry operation (Maximum pressure)",
+        "group": "Technical Data",
+        "value": "100 psi (689 kPa)"
+      },
+      {
+        "key": "Dry operation (Minimum flow rate)",
+        "group": "Technical Data",
+        "value": "5 CFM (8.5 m3/h) at 50 psi (345 kPa)"
+      },
+      {
+        "key": "Dry operation (Air quality)",
+        "group": "Technical Data",
+        "value": "Free of dry contaminants, moisture and oil"
+      },
+      {
+        "key": "Vacuum",
+        "group": "Technical Data",
+        "value": "Must meet or exceed 50 CFM (85 m3/h)"
+      },
+      {
+        "key": "Physical specifications (Case Material)",
+        "group": "Technical Data",
+        "value": "Impact resistant plastic"
+      },
+      {
+        "key": "Physical specifications (Exterior surfaces)",
+        "group": "Technical Data",
+        "value": "Finished with corrosion resistant paint or plating"
+      },
+      {
+        "key": "Physical specifications (Chemical Compatibility)",
+        "group": "Technical Data",
+        "value": "Class I"
+      },
+      {
+        "key": "Dimensions (W x H x D)",
+        "group": "Technical Data",
+        "value": "~ 820 x 460 x 500 mm (32.3 x 18.1 x 19.7 in)"
+      },
+      {
+        "key": "Weight (FlowSync)",
+        "group": "Technical Data",
+        "value": "19.5kg (43lbs)"
+      },
+      {
+        "key": "Weight (TurboSync)",
+        "group": "Technical Data",
+        "value": "13.6kg (30lbs)"
+      },
+      {
+        "key": "Weight (Sync)",
+        "group": "Technical Data",
+        "value": "23.6kg (50.8lbs)"
+      },
+      {
+        "key": "Particle Size and Shape Analysis Range",
+        "group": "General Features",
+        "value": "0.01 to 4000 microns"
+      },
+      {
+        "key": "Sub-micron detection",
+        "group": "General Features",
+        "value": "Excellent using blue laser technology"
+      },
+      {
+        "key": "Resolution",
+        "group": "General Features",
+        "value": "Ability to resolve narrow and multi-modal distributions in the sub-micron range"
+      },
+      {
+        "key": "Detection",
+        "group": "General Features",
+        "value": "Small amounts of oversized or undersized fractions in the particle size distribution"
+      },
+      {
+        "key": "Measurement technology",
+        "group": "General Features",
+        "value": "Patented synchronous measurement technology and BLEND distribution analysis"
+      },
+      {
+        "key": "Parameters",
+        "group": "General Features",
+        "value": "One measurement run yields particle size distribution and over 30 morphological parameters"
+      },
+      {
+        "key": "Fast measurement time",
+        "group": "General Features",
+        "value": "Typically 30 seconds"
+      },
+      {
+        "key": "Switch between wet and dry modules",
+        "group": "General Features",
+        "value": "Fast and easy, less than 15 seconds"
+      },
+      {
+        "key": "Validation package",
+        "group": "General Features",
+        "value": "Full IQ / OQ validation package compliant with FDA 21 CFR Part 11 guidelines"
+      },
+      {
+        "key": "Laser design",
+        "group": "General Features",
+        "value": "Patented Tri-Laser design (red & blue lasers available)"
+      },
+      {
+        "key": "Detector array coverage",
+        "group": "General Features",
+        "value": "0 - 165 degrees"
+      },
+      {
+        "key": "Image analysis components",
+        "group": "General Features",
+        "value": "Stroboscopic light source and integrated camera for dynamic image analysis"
+      },
+      {
+        "key": "Measurement system design",
+        "group": "General Features",
+        "value": "Same bench & dispersion system for laser diffraction & image analysis"
+      },
+      {
+        "key": "Analysis modes",
+        "group": "General Features",
+        "value": "Wet and dry analysis, easy change"
+      },
+      {
+        "key": "Footprint",
+        "group": "General Features",
+        "value": "Small footprint"
+      },
+      {
+        "key": "Operating principle",
+        "group": "General Features",
+        "value": "Robust design, practically maintenance-free and fit for 24/7 operation"
+      },
+      {
+        "key": "Sample throughput",
+        "group": "General Features",
+        "value": "High"
+      },
+      {
+        "key": "Measurement range (general description)",
+        "group": "General Features",
+        "value": "Extremely wide from nanometers to millimeters"
+      },
+      {
+        "key": "Software",
+        "group": "General Features",
+        "value": "DIMENSIONS LS software comprising six clearly structured Workspaces"
+      },
+      {
+        "key": "Software features",
+        "group": "General Features",
+        "value": "Simple method development, Clearly structured result presentation, Various evaluation options, Intuitive workflow, Simple data export, Multi-user capability"
+      }
+    ],
+    "video_url": "https://www.youtube.com/watch?v=92QVb_znZJk&t=1s"
   }
 ];
 export const categories = [

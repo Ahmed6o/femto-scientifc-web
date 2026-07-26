@@ -5,12 +5,20 @@ import './ProductCard.css';
  * layout: 'grid' | 'wide' | 'list' | 'compact'
  */
 export default function ProductCard({ product, layout = 'grid' }) {
+  const thumb = (() => {
+    if (!product || !product.image) return '';
+    if (typeof product.image === 'string' && product.image.startsWith('[')) {
+      try { return JSON.parse(product.image)[0] || ''; } catch(e) { return product.image; }
+    }
+    return product.image;
+  })();
+
   if (layout === 'list') {
     return (
       <div className="pc-list-card">
         <div className="pc-list-img">
           <img
-            src={product.image}
+            src={thumb}
             alt={product.name}
             loading="lazy"
             onError={(e) => {
@@ -50,7 +58,7 @@ export default function ProductCard({ product, layout = 'grid' }) {
       <div className="pc-compact-card">
         <div className="pc-compact-img">
           <img
-            src={product.image}
+            src={thumb}
             alt={product.name}
             loading="lazy"
             onError={(e) => {
@@ -82,7 +90,7 @@ export default function ProductCard({ product, layout = 'grid' }) {
     <div className={`product-card ${layout === 'wide' ? 'product-card--wide' : ''}`}>
       <div className="product-card-img-wrap">
         <img
-          src={product.image}
+          src={thumb}
           alt={product.name}
           loading="lazy"
           onError={(e) => {

@@ -10,6 +10,7 @@ export default function ProductDetail() {
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('product');
+  const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
     fetch(`${BASE_URL}/api/products`)
@@ -19,6 +20,20 @@ export default function ProductDetail() {
         setProduct(found);
         if (found) {
           setRelated(data.filter(p => p.category === found.category && p.id !== found.id).slice(0, 3));
+          
+          let parsedImages = [];
+          if (found.image) {
+            if (typeof found.image === 'string' && found.image.startsWith('[')) {
+               try { parsedImages = JSON.parse(found.image); } catch(e) { parsedImages = [found.image]; }
+            } else {
+               parsedImages = [found.image];
+            }
+          }
+          if (parsedImages.length === 0) {
+            setActiveImage(0);
+          } else {
+            setActiveImage(0);
+          }
         }
         setLoading(false);
       })
@@ -31,7 +46,26 @@ export default function ProductDetail() {
   // Reset tab when product changes
   useEffect(() => {
     setActiveTab('product');
+    setActiveImage(0);
   }, [slug]);
+
+  const images = (() => {
+    if (!product || !product.image) return [];
+    if (typeof product.image === 'string' && product.image.startsWith('[')) {
+      try { return JSON.parse(product.image); } catch(e) { return [product.image]; }
+    }
+    return [product.image];
+  })();
+
+  // Auto-slide images
+  useEffect(() => {
+    if (images.length > 1) {
+      const timer = setInterval(() => {
+        setActiveImage(prev => (prev + 1) % images.length);
+      }, 4000);
+      return () => clearInterval(timer);
+    }
+  }, [images.length]);
 
   if (loading) {
     return (
@@ -136,27 +170,38 @@ export default function ProductDetail() {
           {/* Right: Image */}
           <div className="pd-media">
             <div className="pd-media-card">
-              {product.video_url ? (
-                <video
-                  src={product.video_url}
-                  controls
-                  className="pd-video"
-                />
-              ) : (
+              {images.length > 0 ? (
                 <img
-                  src={product.image}
+                  src={images[activeImage] || images[0]}
                   alt={product.name}
                   className="pd-product-img"
                   onError={(e) => {
                     e.target.src = `https://placehold.co/560x420/eef2ff/1a5db5?text=${encodeURIComponent(product.name)}`;
                   }}
                 />
+              ) : (
+                <div className="pd-no-image" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#94a3b8', fontSize: 48}}><i className="fas fa-cube"/></div>
               )}
               <div className="pd-brand-badge">
                 <i className="fas fa-certificate" />
                 {product.brand}
               </div>
             </div>
+
+            {/* Gallery Thumbnails */}
+            {images.length > 1 && (
+              <div className="pd-gallery-thumbs">
+                {images.map((img, idx) => (
+                  <button 
+                    key={idx} 
+                    className={`pd-thumb-btn ${activeImage === idx ? 'active' : ''}`}
+                    onClick={() => setActiveImage(idx)}
+                  >
+                    <img src={img} alt={`Thumbnail ${idx}`} />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -202,6 +247,26 @@ export default function ProductDetail() {
               <div className="pd-product-description">
                 <p>{product.description}</p>
               </div>
+
+              {/* Product Video */}
+              {product.video_url && (
+                <div className="pd-product-video" style={{ marginBottom: '36px' }}>
+                  {product.video_url.includes('youtube.com') || product.video_url.includes('youtu.be') ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${product.video_url.split('v=')[1]?.split('&')[0] || product.video_url.split('/').pop()}`}
+                      frameBorder="0"
+                      allowFullScreen
+                      style={{ width: '100%', aspectRatio: '16/9', borderRadius: '12px' }}
+                    ></iframe>
+                  ) : (
+                    <video
+                      src={product.video_url}
+                      controls
+                      style={{ width: '100%', borderRadius: '12px', display: 'block' }}
+                    />
+                  )}
+                </div>
+              )}
 
               {/* Key Features */}
               {product.industry && product.industry.length > 0 && (

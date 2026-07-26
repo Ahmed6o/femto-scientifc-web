@@ -3,7 +3,7 @@ import BASE_URL from '../../config';
 import './ProductsManager.css';
 
 const EMPTY_FORM = {
-  slug: '', name: '', category: '', brand: '', image: '', video_url: '',
+  slug: '', name: '', category: '', brand: '', image: [], video_url: '',
   description: '', excerpt: '', featured: false, url: '',
   specifications: [], industry: []
 };
@@ -17,6 +17,8 @@ export default function ProductsManager() {
   const [activeSection, setActiveSection] = useState('basic');
   const [search, setSearch] = useState('');
   const [uploading, setUploading] = useState({ image: false, video: false });
+  const [importUrl, setImportUrl] = useState('');
+  const [isImporting, setIsImporting] = useState(false);
 
   // inline spec / industry
   const [newSpecKey, setNewSpecKey] = useState('');
@@ -39,8 +41,17 @@ export default function ProductsManager() {
   /* ── Edit / Cancel ── */
   const handleEdit = (p) => {
     setEditing(p.id);
+    let parsedImage = [];
+    if (p.image) {
+      if (typeof p.image === 'string' && p.image.startsWith('[')) {
+        try { parsedImage = JSON.parse(p.image); } catch(e) { parsedImage = [p.image]; }
+      } else {
+        parsedImage = [p.image];
+      }
+    }
     setFormData({
       ...EMPTY_FORM, ...p,
+      image: parsedImage,
       specifications: Array.isArray(p.specifications) ? p.specifications : [],
       industry: Array.isArray(p.industry) ? p.industry : [],
     });
@@ -83,8 +94,15 @@ export default function ProductsManager() {
         body
       });
       const data = await res.json();
-      if (data.url) setFormData(p => ({ ...p, [field]: data.url }));
-      else flash('Upload failed', 'error');
+      if (data.url) {
+        if (field === 'image') {
+          setFormData(p => ({ ...p, image: [...(p.image || []), data.url] }));
+        } else {
+          setFormData(p => ({ ...p, [field]: data.url }));
+        }
+      } else {
+        flash('Upload failed', 'error');
+      }
     } catch { flash('Upload error', 'error'); }
     setUploading(u => ({ ...u, [key]: false }));
   };
@@ -107,19 +125,72 @@ export default function ProductsManager() {
     e.preventDefault();
     setSaving(true);
     const isNew = editing === 'new';
+    let resError = null;
+    
+    const payload = {
+      ...formData,
+      image: Array.isArray(formData.image) && formData.image.length > 0 
+             ? (formData.image.length === 1 ? formData.image[0] : JSON.stringify(formData.image)) 
+             : ''
+    };
+
     const res = await fetch(
       isNew ? `${BASE_URL}/api/products` : `${BASE_URL}/api/products/${editing}`,
       {
         method: isNew ? 'POST' : 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('admin_token')}` },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       }
-    ).catch(() => null);
+    ).catch((err) => { resError = err.message; return null; });
+    
     setSaving(false);
-    if (!res || !res.ok) { flash('Save failed. Please try again.', 'error'); return; }
+    
+    if (!res || !res.ok) { 
+      let errorMsg = resError || 'Save failed. Please try again.';
+      if (res) {
+        try {
+          const errData = await res.json();
+          errorMsg = errData.error || errorMsg;
+        } catch(e) {}
+      }
+      flash(`Error: ${errorMsg}`, 'error'); 
+      console.error("Save error:", errorMsg);
+      return; 
+    }
     flash(isNew ? '✅ Product published!' : '✅ Product updated!');
     handleCancel();
     loadProducts();
+  };
+
+  /* ── AI Import ── */
+  const handleAIImport = async () => {
+    if (!importUrl) { flash('Please enter a URL first', 'error'); return; }
+    setIsImporting(true);
+    try {
+      const res = await fetch(`${BASE_URL}/api/scrape`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify({ url: importUrl })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Scraping failed');
+      
+      setFormData(prev => ({
+        ...prev,
+        ...data,
+        image: data.image ? [data.image] : [],
+        industry: data.industry || [],
+        specifications: data.specifications || []
+      }));
+      flash('✅ AI successfully imported the product!');
+      setImportUrl('');
+    } catch (err) {
+      flash(err.message, 'error');
+    }
+    setIsImporting(false);
   };
 
   const filtered = products.filter(p =>
@@ -194,7 +265,7 @@ export default function ProductsManager() {
               >
                 <div className="pm-product-thumb">
                   {p.image
-                    ? <img src={p.image} alt={p.name} />
+                    ? <img src={typeof p.image === 'string' && p.image.startsWith('[') ? JSON.parse(p.image)[0] : p.image} alt={p.name} />
                     : <i className="fas fa-cube" />}
                 </div>
                 <div className="pm-product-meta">
@@ -264,6 +335,32 @@ export default function ProductsManager() {
               {/* ─── Basic Info ─── */}
               {activeSection === 'basic' && (
                 <div className="pm-fields-wrap">
+                  {/* AI Import Box */}
+                  <div className="pm-ai-import-box">
+                    <div className="pm-ai-import-header">
+                      <i className="fas fa-magic" style={{ color: '#8b5cf6' }}></i>
+                      <span>Auto-fill with AI</span>
+                    </div>
+                    <div className="pm-ai-import-body">
+                      <input 
+                        type="url" 
+                        className="pm-input" 
+                        placeholder="Paste product URL (e.g. from Kruss website)"
+                        value={importUrl}
+                        onChange={e => setImportUrl(e.target.value)}
+                        disabled={isImporting}
+                      />
+                      <button 
+                        type="button" 
+                        className="pm-btn-ai" 
+                        onClick={handleAIImport}
+                        disabled={isImporting || !importUrl}
+                      >
+                        {isImporting ? <><i className="fas fa-spinner fa-spin"></i> Extracting...</> : 'Import Data'}
+                      </button>
+                    </div>
+                  </div>
+
                   <div className="pm-field-group pm-field-group--2">
                     <div className="pm-field">
                       <label className="pm-label">Product Name <span className="pm-required">*</span></label>
@@ -328,45 +425,67 @@ export default function ProductsManager() {
               {/* ─── Media ─── */}
               {activeSection === 'media' && (
                 <div className="pm-fields-wrap">
-                  {/* Image */}
+                  {/* Image Gallery */}
                   <div className="pm-field">
-                    <label className="pm-label">Product Image</label>
-                    <div className="pm-upload-zone">
-                      {formData.image ? (
-                        <div className="pm-upload-preview">
-                          <img src={formData.image} alt="preview" />
-                          <button type="button" className="pm-upload-remove"
-                            onClick={() => setFormData({ ...formData, image: '' })}>
-                            <i className="fas fa-times" />
-                          </button>
+                    <label className="pm-label">Product Images</label>
+                    <div className="pm-gallery">
+                      {(formData.image || []).map((img, idx) => (
+                        <div key={idx} className="pm-gallery-item">
+                           <img src={img} alt={`preview ${idx}`} />
+                           <button type="button" className="pm-gallery-remove" onClick={() => {
+                               setFormData(p => ({...p, image: p.image.filter((_, i) => i !== idx)}));
+                           }}>
+                             <i className="fas fa-times" />
+                           </button>
                         </div>
-                      ) : (
-                        <label className="pm-upload-trigger" htmlFor="upload-image">
-                          <i className="fas fa-cloud-upload-alt" />
-                          <span>{uploading.image ? 'Uploading…' : 'Click or drag image here'}</span>
-                          <small>PNG, JPG, WEBP up to 10MB</small>
-                        </label>
-                      )}
+                      ))}
+                      
+                      <label className="pm-gallery-upload" htmlFor="upload-image">
+                        <i className="fas fa-plus" />
+                        <span>Add Image</span>
+                      </label>
                       <input id="upload-image" type="file" accept="image/*" hidden
                         onChange={e => handleUpload(e, 'image')} />
                     </div>
+
                     {/* Or paste URL */}
                     <div className="pm-field" style={{ marginTop: 12 }}>
-                      <label className="pm-label" style={{ fontSize: 12, color: '#999' }}>Or paste image URL</label>
+                      <label className="pm-label" style={{ fontSize: 12, color: '#999' }}>Or paste image URL (Press Enter to add)</label>
                       <input type="text" className="pm-input pm-input--sm"
                         placeholder="https://..."
-                        value={formData.image}
-                        onChange={e => setFormData({ ...formData, image: e.target.value })} />
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                             e.preventDefault();
+                             const val = e.target.value.trim();
+                             if (val) {
+                                setFormData(p => ({...p, image: [...(p.image || []), val]}));
+                                e.target.value = '';
+                             }
+                          }
+                        }} />
                     </div>
                   </div>
 
                   {/* Video */}
                   <div className="pm-field" style={{ marginTop: 24 }}>
                     <label className="pm-label">Product Video <span className="pm-optional">optional</span></label>
+                    <div className="pm-field" style={{ marginBottom: 12 }}>
+                      <input type="text" className="pm-input pm-input--sm"
+                        placeholder="Paste YouTube or Video URL (e.g. https://youtube.com/watch?v=...)"
+                        value={formData.video_url || ''}
+                        onChange={e => setFormData({ ...formData, video_url: e.target.value })} />
+                    </div>
                     <div className="pm-upload-zone pm-upload-zone--video">
                       {formData.video_url ? (
                         <div className="pm-upload-preview pm-upload-preview--video">
-                          <video src={formData.video_url} controls style={{ width: '100%', borderRadius: 8 }} />
+                          {formData.video_url.includes('youtube.com') || formData.video_url.includes('youtu.be') ? (
+                            <iframe 
+                              src={`https://www.youtube.com/embed/${formData.video_url.split('v=')[1]?.split('&')[0] || formData.video_url.split('/').pop()}`}
+                              frameBorder="0" allowFullScreen
+                              style={{ width: '100%', height: 200, borderRadius: 8 }}></iframe>
+                          ) : (
+                            <video src={formData.video_url} controls style={{ width: '100%', borderRadius: 8 }} />
+                          )}
                           <button type="button" className="pm-upload-remove"
                             onClick={() => setFormData({ ...formData, video_url: '' })}>
                             <i className="fas fa-times" /> Remove video
@@ -375,7 +494,7 @@ export default function ProductsManager() {
                       ) : (
                         <label className="pm-upload-trigger" htmlFor="upload-video">
                           <i className="fas fa-film" />
-                          <span>{uploading.video ? 'Uploading…' : 'Upload a product video'}</span>
+                          <span>{uploading.video ? 'Uploading…' : 'Or upload a product video'}</span>
                           <small>MP4, WEBM up to 50MB</small>
                         </label>
                       )}
