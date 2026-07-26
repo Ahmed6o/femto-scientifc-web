@@ -151,7 +151,9 @@ export default function ProductsManager() {
         try {
           const errData = await res.json();
           errorMsg = errData.error || errorMsg;
-        } catch(e) {}
+        } catch(e) {
+          errorMsg = `Server returned an invalid response (not JSON). ${e.message}`;
+        }
       }
       flash(`Error: ${errorMsg}`, 'error'); 
       console.error("Save error:", errorMsg);

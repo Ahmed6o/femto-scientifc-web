@@ -15,30 +15,35 @@ function verifyAuth(req) {
 }
 
 export default async function handler(req, res) {
-  const { method } = req;
+  try {
+    const { method } = req;
 
-  if (method === 'GET') {
-    const { data: products, error } = await supabase.from('products').select('*');
-    if (error) return res.status(500).json({ error: error.message });
-    return res.json(products || []);
-  }
-
-  if (method === 'POST') {
-    let user;
-    try {
-      user = verifyAuth(req);
-    } catch (authErr) {
-      return res.status(401).json({ error: 'Unauthorized: ' + authErr.message });
+    if (method === 'GET') {
+      const { data: products, error } = await supabase.from('products').select('*');
+      if (error) return res.status(500).json({ error: error.message });
+      return res.json(products || []);
     }
 
-    const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
-    const { data, error } = await supabase.from('products').insert([
-      { slug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url }
-    ]).select().single();
+    if (method === 'POST') {
+      let user;
+      try {
+        user = verifyAuth(req);
+      } catch (authErr) {
+        return res.status(401).json({ error: 'Unauthorized: ' + authErr.message });
+      }
 
-    if (error) return res.status(500).json({ error: error.message });
-    return res.json({ id: data?.id });
+      const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
+      const { data, error } = await supabase.from('products').insert([
+        { slug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url }
+      ]).select().single();
+
+      if (error) return res.status(500).json({ error: error.message });
+      return res.json({ id: data?.id });
+    }
+
+    res.status(405).json({ error: 'Method not allowed' });
+  } catch (err) {
+    console.error("Vercel API Error:", err);
+    res.status(500).json({ error: 'Internal server error: ' + err.message });
   }
-
-  res.status(405).json({ error: 'Method not allowed' });
 }
