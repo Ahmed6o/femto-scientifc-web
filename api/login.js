@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       .single();
 
     if (user && !error) {
-      const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '24h' });
+      const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '30d' });
       res.json({ token });
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
