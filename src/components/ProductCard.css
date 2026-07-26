@@ -176,3 +176,17 @@
 .read-more-btn:hover i {
   transform: translateX(3px);
 }
+
+/* ── Wide variant (2-col grid) ── */
+.product-card--wide .product-card-img-wrap {
+  aspect-ratio: 16/9;
+}
+
+.product-card--wide .product-card-title {
+  font-size: 19px;
+}
+
+.product-card--wide .product-card-excerpt {
+  -webkit-line-clamp: 4;
+}
+
