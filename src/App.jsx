@@ -13,6 +13,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import ProductsManager from './pages/admin/ProductsManager';
 import PagesManager from './pages/admin/PagesManager';
+import SiteEditor from './pages/admin/SiteEditor';
 
 import { pageApp, pageSol } from './data/pages';
 
@@ -121,6 +122,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="products" element={<ProductsManager />} />
           <Route path="pages" element={<PagesManager />} />
+          <Route path="site-editor" element={<SiteEditor />} />
         </Route>
 
         <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />

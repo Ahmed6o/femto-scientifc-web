@@ -33,9 +33,37 @@ export default async function handler(req, res) {
     }
 
     if (method === 'PUT') {
-      const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
+      let { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
+      
+      let baseSlug = slug;
+      if (!baseSlug && name) {
+        baseSlug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      } else if (!baseSlug) {
+        baseSlug = `product-${Date.now()}`;
+      }
+
+      let uniqueSlug = baseSlug;
+      let counter = 1;
+      let isUnique = false;
+      
+      while (!isUnique) {
+        const { data: existing, error: checkError } = await supabase
+          .from('products')
+          .select('id')
+          .eq('slug', uniqueSlug)
+          .neq('id', id)
+          .maybeSingle();
+          
+        if (checkError || !existing) {
+          isUnique = true;
+        } else {
+          uniqueSlug = `${baseSlug}-${counter}`;
+          counter++;
+        }
+      }
+
       const { data, error } = await supabase.from('products').update({
-        slug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url
+        slug: uniqueSlug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url
       }).eq('id', id).select();
 
       if (error) return res.status(500).json({ error: error.message });

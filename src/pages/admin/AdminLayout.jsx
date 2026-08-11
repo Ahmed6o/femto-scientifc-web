@@ -52,6 +52,11 @@ export default function AdminLayout() {
             </Link>
           </li>
           <li>
+            <Link to="/admin/site-editor" className={isActive('/admin/site-editor')}>
+              <i className="fas fa-paint-brush"></i> Site Editor
+            </Link>
+          </li>
+          <li>
             <Link to="/" target="_blank">
               <i className="fas fa-external-link-alt"></i> View Site
             </Link>

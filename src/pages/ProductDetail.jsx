@@ -4,6 +4,11 @@ import ProductCard from '../components/ProductCard';
 import BASE_URL from '../config';
 import './ProductDetail.css';
 
+const DEFAULT_CONTACT_GLOBALS = {
+  contact: { phone: '+20 123 456 7890' },
+  contactBar: { text: 'Need expert advice?', buttonText: 'Get in touch' },
+};
+
 export default function ProductDetail() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
@@ -11,6 +16,22 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('product');
   const [activeImage, setActiveImage] = useState(0);
+  const [globals, setGlobals] = useState(DEFAULT_CONTACT_GLOBALS);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/settings`)
+      .then(r => r.json())
+      .then(settings => {
+        const saved = settings.site_globals;
+        if (saved) {
+          setGlobals({
+            contact: { ...DEFAULT_CONTACT_GLOBALS.contact, ...(saved.contact || {}) },
+            contactBar: { ...DEFAULT_CONTACT_GLOBALS.contactBar, ...(saved.contactBar || {}) },
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     fetch(`${BASE_URL}/api/products`)
@@ -288,11 +309,11 @@ export default function ProductDetail() {
                   <i className="fas fa-headset" />
                 </div>
                 <div className="pd-contact-text">
-                  <small>Need expert advice?</small>
-                  <strong>+20 123 456 7890</strong>
+                  <small>{globals.contactBar.text}</small>
+                  <strong>{globals.contact.phone}</strong>
                 </div>
                 <a href="/contact" className="pd-btn-primary pd-contact-cta">
-                  <i className="fas fa-envelope" /> Get in touch
+                  <i className="fas fa-envelope" /> {globals.contactBar.buttonText}
                 </a>
               </div>
             </div>

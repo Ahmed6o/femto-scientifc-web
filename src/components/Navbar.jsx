@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import BASE_URL from '../config';
 import './Navbar.css';
 
 const navLinks = [
@@ -42,12 +43,23 @@ const productsByIndustry = [
   { label: 'Mineral / Mining', path: '/products?industry=mining' },
 ];
 
+const DEFAULT_GLOBALS = {
+  contact: { email: 'info@femto-scientific.com', phone: '+20 123 456 7890' },
+  social: {
+    facebook: 'https://www.facebook.com',
+    linkedin: 'https://www.linkedin.com',
+    twitter: 'https://www.twitter.com',
+    youtube: 'https://www.youtube.com',
+  },
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [globals, setGlobals] = useState(DEFAULT_GLOBALS);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -67,6 +79,22 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  // Load site globals from settings
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/settings`)
+      .then(r => r.json())
+      .then(settings => {
+        const saved = settings.site_globals;
+        if (saved) {
+          setGlobals({
+            contact: { ...DEFAULT_GLOBALS.contact, ...(saved.contact || {}) },
+            social: { ...DEFAULT_GLOBALS.social, ...(saved.social || {}) },
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
@@ -82,18 +110,18 @@ export default function Navbar() {
       <div className="topbar">
         <div className="container topbar-inner">
           <div className="topbar-left">
-            <a href="mailto:info@femto-scientific.com" className="topbar-link">
-              <i className="fas fa-envelope" /> info@femto-scientific.com
+            <a href={`mailto:${globals.contact.email}`} className="topbar-link">
+              <i className="fas fa-envelope" /> {globals.contact.email}
             </a>
-            <a href="tel:+201234567890" className="topbar-link">
-              <i className="fas fa-phone" /> +20 123 456 7890
+            <a href={`tel:${globals.contact.phone.replace(/\s/g, '')}`} className="topbar-link">
+              <i className="fas fa-phone" /> {globals.contact.phone}
             </a>
           </div>
           <div className="topbar-right">
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-facebook-f" /></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-linkedin-in" /></a>
-            <a href="https://www.twitter.com" target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-twitter" /></a>
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-youtube" /></a>
+            <a href={globals.social.facebook} target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-facebook-f" /></a>
+            <a href={globals.social.linkedin} target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-linkedin-in" /></a>
+            <a href={globals.social.twitter} target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-twitter" /></a>
+            <a href={globals.social.youtube} target="_blank" rel="noreferrer" className="topbar-social"><i className="fab fa-youtube" /></a>
           </div>
         </div>
       </div>
@@ -246,8 +274,8 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="mobile-contact">
-            <a href="tel:+201234567890"><i className="fas fa-phone" /> +20 123 456 7890</a>
-            <a href="mailto:info@femto-scientific.com"><i className="fas fa-envelope" /> info@femto-scientific.com</a>
+            <a href={`tel:${globals.contact.phone.replace(/\s/g, '')}`}><i className="fas fa-phone" /> {globals.contact.phone}</a>
+            <a href={`mailto:${globals.contact.email}`}><i className="fas fa-envelope" /> {globals.contact.email}</a>
           </div>
         </div>
       </nav>

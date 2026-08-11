@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import BASE_URL from '../config';
 import './Footer.css';
 
 const footerLinks = {
@@ -34,7 +36,38 @@ const industries = [
   'Cement Manufacturing',
 ];
 
+const DEFAULT_GLOBALS = {
+  contact: { email: 'info@femto-scientific.com', phone: '+20 123 456 7890', address: 'Cairo, Egypt' },
+  social: {
+    facebook: 'https://www.facebook.com',
+    linkedin: 'https://www.linkedin.com',
+    twitter: 'https://www.twitter.com',
+    youtube: 'https://www.youtube.com',
+  },
+  companyDescription: 'We are a leading company in Egypt for Supplying, Installing, Training, and after sales support for Scientific and Analytical instruments.',
+  footer: { copyright: 'Femto-Scientific' },
+};
+
 export default function Footer() {
+  const [globals, setGlobals] = useState(DEFAULT_GLOBALS);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/settings`)
+      .then(r => r.json())
+      .then(settings => {
+        const saved = settings.site_globals;
+        if (saved) {
+          setGlobals({
+            contact: { ...DEFAULT_GLOBALS.contact, ...(saved.contact || {}) },
+            social: { ...DEFAULT_GLOBALS.social, ...(saved.social || {}) },
+            companyDescription: saved.companyDescription || DEFAULT_GLOBALS.companyDescription,
+            footer: { ...DEFAULT_GLOBALS.footer, ...(saved.footer || {}) },
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <footer className="footer">
       {/* Main Footer */}
@@ -52,28 +85,27 @@ export default function Footer() {
                 />
               </Link>
               <p className="footer-desc">
-                We are a leading company in Egypt for Supplying, Installing, Training,
-                and after sales support for Scientific and Analytical instruments.
+                {globals.companyDescription}
               </p>
               <div className="footer-contact-list">
-                <a href="tel:+201234567890" className="footer-contact-item">
+                <a href={`tel:${globals.contact.phone.replace(/\s/g, '')}`} className="footer-contact-item">
                   <div className="footer-contact-icon"><i className="fas fa-phone" /></div>
-                  <span>+20 123 456 7890</span>
+                  <span>{globals.contact.phone}</span>
                 </a>
-                <a href="mailto:info@femto-scientific.com" className="footer-contact-item">
+                <a href={`mailto:${globals.contact.email}`} className="footer-contact-item">
                   <div className="footer-contact-icon"><i className="fas fa-envelope" /></div>
-                  <span>info@femto-scientific.com</span>
+                  <span>{globals.contact.email}</span>
                 </a>
                 <div className="footer-contact-item">
                   <div className="footer-contact-icon"><i className="fas fa-map-marker-alt" /></div>
-                  <span>Cairo, Egypt</span>
+                  <span>{globals.contact.address}</span>
                 </div>
               </div>
               <div className="footer-socials">
-                <a href="https://www.facebook.com" target="_blank" rel="noreferrer" className="social-btn fb"><i className="fab fa-facebook-f" /></a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="social-btn li"><i className="fab fa-linkedin-in" /></a>
-                <a href="https://www.twitter.com" target="_blank" rel="noreferrer" className="social-btn tw"><i className="fab fa-twitter" /></a>
-                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" className="social-btn yt"><i className="fab fa-youtube" /></a>
+                <a href={globals.social.facebook} target="_blank" rel="noreferrer" className="social-btn fb"><i className="fab fa-facebook-f" /></a>
+                <a href={globals.social.linkedin} target="_blank" rel="noreferrer" className="social-btn li"><i className="fab fa-linkedin-in" /></a>
+                <a href={globals.social.twitter} target="_blank" rel="noreferrer" className="social-btn tw"><i className="fab fa-twitter" /></a>
+                <a href={globals.social.youtube} target="_blank" rel="noreferrer" className="social-btn yt"><i className="fab fa-youtube" /></a>
               </div>
             </div>
 
@@ -132,7 +164,7 @@ export default function Footer() {
       {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
-          <p>© {new Date().getFullYear()} <strong>Femto-Scientific</strong>. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} <strong>{globals.footer.copyright}</strong>. All rights reserved.</p>
           <div className="footer-bottom-links">
             <Link to="/privacy">Privacy Policy</Link>
             <span>|</span>

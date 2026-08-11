@@ -32,9 +32,36 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Unauthorized: ' + authErr.message });
       }
 
-      const { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
+      let { slug, name, category, brand, industry, image, description, excerpt, featured, url, specifications, video_url } = req.body;
+      
+      let baseSlug = slug;
+      if (!baseSlug && name) {
+        baseSlug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      } else if (!baseSlug) {
+        baseSlug = `product-${Date.now()}`;
+      }
+
+      let uniqueSlug = baseSlug;
+      let counter = 1;
+      let isUnique = false;
+      
+      while (!isUnique) {
+        const { data: existing, error: checkError } = await supabase
+          .from('products')
+          .select('id')
+          .eq('slug', uniqueSlug)
+          .maybeSingle();
+          
+        if (checkError || !existing) {
+          isUnique = true;
+        } else {
+          uniqueSlug = `${baseSlug}-${counter}`;
+          counter++;
+        }
+      }
+
       const { data, error } = await supabase.from('products').insert([
-        { slug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url }
+        { slug: uniqueSlug, name, category, brand, industry: industry || [], image, description, excerpt, featured: !!featured, url, specifications: specifications || [], video_url }
       ]).select().single();
 
       if (error) return res.status(500).json({ error: error.message });
